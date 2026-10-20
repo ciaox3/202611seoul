@@ -118,7 +118,9 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .stop .when{font-size:.8rem;font-weight:900}
 .stop h4{font-size:1.1rem;font-weight:900;line-height:1.4}
 .stop .en{font-size:.78rem;font-weight:700;opacity:.75}
-.stop p{font-size:.9rem;margin-top:4px}
+.stop p{font-size:.9rem;margin-top:4px;white-space:pre-line}
+.remind{margin-top:10px;border:var(--line);border-radius:16px;background:var(--yellow);padding:6px 12px;font-size:.9rem}
+.remind b{display:block;font-size:.85rem}
 .must-tag{display:inline-block;transform:rotate(-4deg);border:var(--line);border-radius:10px;background:var(--coral);font-size:.78rem;font-weight:900;padding:0 8px;margin-left:6px;vertical-align:middle}
 .leg{margin-bottom:12px}
 .tag{display:inline-block;border:var(--line);border-radius:999px;padding:0 12px;font-size:.8rem;font-weight:900}
@@ -382,7 +384,7 @@ const DAYS=[
  items:[
   {t:"stop",when:"12:45",name:"桃園機場集合",en:"第二航廈・長榮航空團體 20 號櫃台",desc:"由領隊協助辦理登機與行李託運。"},
   {t:"leg",tag:"plane",label:"飛機",dur:"BR160　15:15 起飛｜2 小時 30 分"},
-  {t:"stop",when:"18:45",name:"抵達仁川國際機場",en:"Incheon Airport",desc:"駐韓代表熱情迎接，踏入期待已久的韓國。",must:true},
+  {t:"stop",when:"18:45",name:"抵達仁川國際機場",en:"Incheon Airport",desc:"駐韓代表熱情迎接，踏入期待已久的韓國。",remind:"購買 WOWPASS 卡 & 儲值"},
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1 小時"},
   {t:"stop",name:"入住金浦 Hotel Marinabay Seoul",en:"4 ★",desc:"好好休息，明天開始圖書館巡禮。"}
  ]},
@@ -390,11 +392,11 @@ const DAYS=[
  meals:["早｜酒店內","午｜自理（方便逛街）","晚｜炸醬麵＋糖醋肉（四人一份）"],
  items:[
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1 小時"},
-  {t:"stop",name:"京畿圖書館",en:"Gyeonggi Library",desc:"2025 年 10 月底新開幕，韓國規模最大的地方公立圖書館，圓柱螺旋外觀被稱為「蝸牛圖書館」。",must:true},
+  {t:"stop",name:"京畿圖書館",en:"Gyeonggi Library",desc:"耗時 9 年興建，2025 年 10 月底開幕，為韓國規模最大的地方公立圖書館。因圓柱螺旋造型，被暱稱為「蝸牛圖書館」。建築共 9 層(B4–5F)，總面積達 27,795 平方公尺。\n特色空間與服務：\n- B1｜書工房與 AI 體驗：結合數位排版、傳統裝幀工藝及 AI 科技應用。\n- 1F｜閱讀與展示空間：設有閱讀休憩區、環境主題展區及獨立書店專區。\n- 5F｜Book Therapy 圖書療癒：針對 5–12 歲兒童，以 AI 分析繪畫並結合心理專業評估，提供個人化閱讀建議與繪本推薦。",must:true},
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 30 分鐘"},
-  {t:"stop",name:"水原星空圖書館",en:"Starfield Library（Starfield 購物中心）",desc:"高 22 公尺的巨型書牆與懸浮星球，免費入場。",must:true},
+  {t:"stop",name:"水原星空圖書館",en:"Starfield Library（Starfield 購物中心）",desc:"2024 年 1 月 26 日開幕，位於購物中心 4–7 樓，高達 22 公尺，藏書約 7 萬冊。以挑高 13 公尺的開放式設計，串聯各樓層，打造結合閱讀、休閒與文化交流的公共空間。\n特色空間與服務：\n- 開放式閱讀空間：跨樓層挑高設計，從各樓層皆可欣賞圖書館景觀。\n- 閱讀與休憩：各樓層設有咖啡廳、舒適座位及閱讀區，提供閱讀、聆聽音樂與放鬆的空間。\n- 藝文交流活動：定期舉辦表演與講座，讓民眾在購物之餘也能享受文化藝術。",must:true},
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 40 分鐘"},
-  {t:"stop",name:"韓國聖潔大學圖書館",en:"Sungkyul University",desc:"設有氣候環境檔案館、AI 繪本創作圖書館與世界朋友圖書村，頂樓還有森林露營閱覽區。"},
+  {t:"stop",name:"韓國聖潔大學圖書館",en:"Sungkyul University",desc:"聖潔大學創立於 1962 年，設有 7 所學院、5 所研究生院，約 5,900 名學生及 167 名專任教師(2026 年)。\n圖書館新館於 2010 年啟用，共 8 層(2–6F)，實體館藏逾 40 萬冊，其中約 18 萬冊存放於自動化密集書庫。\n特色空間與服務：\n- 自動化書庫：韓國大學首創自動書庫系統，提升館藏儲存與管理效率。\n- 6F｜古書室：典藏珍貴神學與宗教研究文獻，為韓國重要的神學研究資源。\n- 學術研究支援：提供豐富的實體館藏與專業研究資源，支援教學及學術研究。",must:true},
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1 小時"},
   {t:"stop",name:"金浦現代 Premium Outlet",en:"Gimpo Hyundai Premium Outlet",desc:"超過 350 個品牌，折扣約 4～9 折。"},
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 5 分鐘"},
@@ -460,7 +462,7 @@ DAYS.forEach((d,i)=>{
     return `<li class="${it.must?"must":""}"><div class="stop ${it.must?"must":""}">
       ${it.when?`<div class="when">${it.when}</div>`:""}
       <h4>${esc(it.name)}${it.must?'<span class="must-tag">必去</span>':""}</h4>
-      <div class="en">${esc(it.en)}</div><p>${esc(it.desc)}</p></div></li>`;
+      <div class="en">${esc(it.en)}</div><p>${esc(it.desc)}</p>${it.remind?`<div class="remind"><b>📌 大芬提醒．提醒大芬</b>${esc(it.remind)}</div>`:""}</div></li>`;
   }).join("");
   p.innerHTML=`<div class="day-head"><div class="day-badge"><div><small>DAY</small>${d.n}</div></div>
     <div><h3>${d.title}</h3><p>${d.sub}</p></div></div>
