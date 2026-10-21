@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="2026/11/01–11/05 首爾圖書館參訪五日行程：航班、每日行程、待辦清單與住宿資訊。">
+<meta name="theme-color" content="#FFFCF6">
+<title>首爾五日小旅行｜2026.11.01–11.05</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFCF6; --ink:#3E3A39;
+  --coral:#F2A497; --yellow:#F6D27A; --sky:#A8D3E6; --green:#B9DAA5;
+  --line:3px solid var(--ink);
+  --r:26px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","PingFang TC","Noto Sans TC",sans-serif;
+  font-weight:500;line-height:1.7;font-size:16px;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-weight:900;line-height:1.3}
+section{padding:36px 0 8px}
+.sec-title{display:flex;align-items:center;gap:10px;font-size:1.5rem;margin-bottom:16px}
+.sec-title .dot{width:18px;height:18px;border:var(--line);border-radius:50%;background:var(--yellow)}
+.card{background:var(--paper);border:var(--line);border-radius:var(--r);padding:18px}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--paper);border-bottom:var(--line)}
+nav ul{list-style:none;display:flex;gap:8px;max-width:640px;margin:0 auto;padding:9px 12px;overflow-x:auto;scrollbar-width:none}
+nav ul::-webkit-scrollbar{display:none}
+nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:900;font-size:.9rem;
+  padding:4px 14px;border:var(--line);border-radius:999px;background:var(--paper);transition:transform .2s}
+nav a:nth-child(1){background:var(--coral)}
+nav li:nth-child(2) a{background:var(--sky)}
+nav li:nth-child(3) a{background:var(--yellow)}
+nav li:nth-child(4) a{background:var(--green)}
+nav li:nth-child(5) a{background:var(--coral)}
+nav a:active{transform:scale(.92)}
+nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px dashed var(--ink);outline-offset:3px}
+
+/* hero */
+.hero{padding-top:72px}
+.scene{border:var(--line);border-radius:34px;overflow:hidden;background:var(--sky);margin-top:14px}
+.scene svg{display:block;width:100%;height:auto}
+.hero-text{text-align:center;padding:20px 0 6px}
+.hero-text .kicker{display:inline-block;border:var(--line);border-radius:999px;background:var(--yellow);padding:0 14px;font-weight:900;font-size:.9rem}
+.hero-text h1{font-size:2.1rem;margin:10px 0 4px;letter-spacing:.04em}
+.hero-text p{font-size:.95rem}
+.countdown{margin-top:16px;background:var(--green)}
+.countdown .label{text-align:center;font-weight:900;margin-bottom:10px}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cd div{background:var(--paper);border:var(--line);border-radius:18px;text-align:center;padding:6px 0 4px}
+.cd b{display:block;font-size:1.7rem;font-weight:900;line-height:1.2;font-variant-numeric:tabular-nums}
+.cd span{font-size:.75rem;font-weight:700}
+.cd-note{text-align:center;font-size:.85rem;margin-top:10px}
+
+/* flights */
+.flight{margin-bottom:16px;position:relative;overflow:hidden}
+.flight.out{background:var(--sky)}
+.flight.back{background:var(--coral)}
+.f-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:900}
+.pill{border:var(--line);border-radius:999px;background:var(--paper);padding:0 12px;font-size:.85rem;font-weight:900}
+.route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;background:var(--paper);border:var(--line);border-radius:20px;padding:12px 8px;text-align:center}
+.route .code{font-size:1.9rem;font-weight:900;line-height:1.1}
+.route .city{font-size:.8rem}
+.route .time{font-weight:900;font-size:1.1rem}
+.mid{display:flex;flex-direction:column;align-items:center;font-size:.7rem;font-weight:700}
+.mid svg{width:54px;height:22px}
+.f-meta{margin-top:10px;font-size:.9rem}
+.meet{background:var(--yellow)}
+.meet h3{margin-bottom:6px}
+.meet li{margin-left:1.2em}
+
+/* days */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 12px;scrollbar-width:none;position:sticky;top:56px;z-index:20;background:var(--paper)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;min-width:62px;font-family:inherit;color:var(--ink);cursor:pointer;
+  border:var(--line);border-radius:20px;background:var(--paper);padding:5px 8px 3px;text-align:center;line-height:1.25}
+.tab small{display:block;font-size:.7rem;font-weight:700}
+.tab strong{font-size:1.05rem;font-weight:900}
+.tab[aria-selected="true"]{background:var(--yellow);transform:translateY(-3px);box-shadow:0 4px 0 var(--ink)}
+.tab.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.8)}50%{transform:scale(1.14) translateY(-5px)}100%{transform:scale(1) translateY(-3px)}}
+.panel{animation:bounceIn .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes bounceIn{0%{opacity:0;transform:translateY(26px) scale(.96)}60%{opacity:1;transform:translateY(-6px)}100%{transform:none}}
+.panel[hidden]{display:none}
+.day-head{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.day-badge{flex:none;width:64px;height:64px;border:var(--line);border-radius:50%;background:var(--coral);display:grid;place-items:center;text-align:center;font-weight:900;line-height:1.1}
+.day-badge small{display:block;font-size:.7rem}
+.day-head h3{font-size:1.2rem}
+.day-head p{font-size:.85rem}
+.gather{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:var(--line);border-radius:20px;background:var(--coral);padding:8px 14px;margin-bottom:12px;font-weight:900}
+.gather label{flex:none}
+.gather input{font-family:inherit;font-weight:900;font-size:1.05rem;color:var(--ink);background:var(--paper);border:var(--line);border-radius:14px;padding:2px 10px;min-width:120px}
+.gather .hint{font-size:.78rem;font-weight:700;flex-basis:100%}
+.meals{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px}
+.meals div{border:var(--line);border-radius:16px;padding:4px 6px;font-size:.8rem;line-height:1.4;background:var(--paper)}
+.meals div:nth-child(1){background:var(--yellow)}
+.meals div:nth-child(2){background:var(--green)}
+.meals div:nth-child(3){background:var(--sky)}
+.meals b{display:block;font-size:.75rem}
+
+.timeline{list-style:none;position:relative;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;border-left:3px dashed var(--ink)}
+.timeline>li{position:relative;margin-bottom:14px}
+.timeline>li::before{content:"";position:absolute;left:-31px;top:14px;width:16px;height:16px;border:var(--line);border-radius:50%;background:var(--paper)}
+.timeline>li.must::before{background:var(--coral)}
+.timeline>li.leg::before{width:10px;height:10px;left:-28px;top:8px;background:var(--ink)}
+.stop{background:var(--paper);border:var(--line);border-radius:22px;padding:12px 14px}
+.stop.must{background:#FFF1EE}
+.stop .when{font-size:.8rem;font-weight:900}
+.stop h4{font-size:1.1rem;font-weight:900;line-height:1.4}
+.stop .en{font-size:.78rem;font-weight:700;opacity:.75}
+.stop p{font-size:.9rem;margin-top:4px;white-space:pre-line}
+.remind{margin-top:10px;border:var(--line);border-radius:16px;background:var(--yellow);padding:6px 12px;font-size:.9rem}
+.remind b{display:block;font-size:.85rem}
+.must-tag{display:inline-block;transform:rotate(-4deg);border:var(--line);border-radius:10px;background:var(--coral);font-size:.78rem;font-weight:900;padding:0 8px;margin-left:6px;vertical-align:middle}
+.leg{margin-bottom:12px}
+.tag{display:inline-block;border:var(--line);border-radius:999px;padding:0 12px;font-size:.8rem;font-weight:900}
+.tag.bus{background:var(--green)}
+.tag.plane{background:var(--sky)}
+.tag.walk{background:var(--yellow)}
+.tag.ship{background:var(--coral)}
+.tag.rail{background:#fff}
+.leg .dur{font-size:.8rem;margin-left:6px;font-weight:700}
+
+/* todo */
+.progress{height:20px;border:var(--line);border-radius:999px;overflow:hidden;background:var(--paper);margin-bottom:6px}
+.progress i{display:block;height:100%;width:0;background:var(--green);border-right:var(--line);transition:width .5s cubic-bezier(.3,1.5,.5,1)}
+.pcount{text-align:right;font-weight:900;font-size:.85rem;margin-bottom:10px}
+.todo{list-style:none;display:grid;gap:10px}
+.todo label{display:flex;gap:12px;align-items:flex-start;border:var(--line);border-radius:20px;padding:10px 14px;cursor:pointer;background:var(--paper)}
+.todo input{position:absolute;opacity:0;pointer-events:none}
+.box{flex:none;width:28px;height:28px;border:var(--line);border-radius:10px;background:var(--paper);display:grid;place-items:center;margin-top:2px;transition:transform .2s}
+.box svg{width:18px;height:18px;opacity:0;transform:scale(0)}
+.todo input:checked+.box{background:var(--yellow)}
+.todo input:checked+.box svg{opacity:1;transform:scale(1);transition:transform .35s cubic-bezier(.3,1.8,.5,1)}
+.todo input:checked~.txt{text-decoration:line-through;text-decoration-thickness:2px;opacity:.55}
+.todo label:active .box{transform:scale(.85)}
+.txt b{display:block;line-height:1.4}
+.txt small{font-size:.8rem;font-weight:700}
+.reset{margin-top:14px;font-family:inherit;font-weight:900;color:var(--ink);background:var(--sky);border:var(--line);border-radius:999px;padding:4px 18px;cursor:pointer}
+
+/* hotel */
+.hotel-art{border:var(--line);border-radius:var(--r);overflow:hidden;background:var(--green);margin-bottom:14px}
+.hotel-art svg{display:block;width:100%;height:auto}
+.hotel h3{font-size:1.3rem}
+.stars{color:var(--ink);letter-spacing:.1em}
+.info{list-style:none;margin:12px 0;display:grid;gap:8px}
+.info li{border:var(--line);border-radius:16px;padding:6px 12px;font-size:.9rem;background:var(--paper)}
+.info b{margin-right:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{border:var(--line);border-radius:999px;padding:0 12px;font-size:.82rem;font-weight:900;background:var(--yellow)}
+.chips span:nth-child(2n){background:var(--sky)}
+.chips span:nth-child(3n){background:var(--green)}
+.nights{margin-top:14px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center;font-size:.75rem;font-weight:900}
+.nights div{border:var(--line);border-radius:14px;padding:3px 0;background:var(--paper)}
+.nights div.home{background:var(--coral)}
+
+footer{text-align:center;padding:40px 16px 48px;font-weight:900}
+footer svg{width:90px;height:auto}
+
+/* ambient animation */
+.cloud1{animation:drift 22s ease-in-out infinite alternate}
+.cloud2{animation:drift 30s ease-in-out infinite alternate-reverse}
+.plane{animation:fly 14s ease-in-out infinite alternate}
+.sun{animation:bob 6s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.gull{animation:flap 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.gull2{animation-delay:-1.4s}
+.tower-light{animation:blink 2.5s ease-in-out infinite}
+.wave{animation:drift 6s ease-in-out infinite alternate}
+.wobble{animation:wobble 4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes drift{from{transform:translateX(-14px)}to{transform:translateX(22px)}}
+@keyframes fly{from{transform:translate(-20px,6px) rotate(-3deg)}to{transform:translate(30px,-10px) rotate(2deg)}}
+@keyframes bob{50%{transform:translateY(-5px) scale(1.04)}}
+@keyframes flap{50%{transform:translateY(-6px) rotate(-6deg)}}
+@keyframes blink{50%{opacity:.25}}
+@keyframes wobble{50%{transform:rotate(2deg)}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="主選單">
+  <ul>
+    <li><a href="#top">首頁</a></li>
+    <li><a href="#flight">航班</a></li>
+    <li><a href="#days">行程</a></li>
+    <li><a href="#todo">待辦</a></li>
+    <li><a href="#hotel">住宿</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+<!-- HERO -->
+<header class="hero wrap">
+  <div class="scene" role="img" aria-label="插圖：景福宮光化門、首爾塔、飛機與海鷗">
+    <svg viewBox="0 0 400 270" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="270" fill="#A8D3E6"/>
+      <g class="sun"><circle cx="330" cy="58" r="30" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/></g>
+      <g class="cloud1"><path d="M40 70 q0-18 20-18 q8-14 26-6 q22-2 22 16 q14 2 12 14 H34 q-10-2-6-6z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></g>
+      <g class="cloud2"><path d="M220 118 q0-14 16-14 q8-10 22-4 q18 0 18 14 q10 2 8 10 H214 q-8-2-4-6z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></g>
+      <!-- plane -->
+      <g class="plane">
+        <g transform="translate(130 36)">
+          <path d="M0 22 q0-10 12-10 H66 q14 0 22 8 q-8 8-22 8 H12 q-12 0-12-6z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M30 14 L18 0 H30 L50 14z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M30 28 L16 42 H30 L50 28z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M2 14 L-6 4 H6 L12 13z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="60" cy="20" r="3" fill="#3E3A39"/><circle cx="72" cy="20" r="3" fill="#3E3A39"/>
+        </g>
+      </g>
+      <!-- mountains -->
+      <path d="M0 190 L70 120 L120 165 L190 100 L270 175 L330 130 L400 185 V270 H0z" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+      <!-- Namsan tower -->
+      <g>
+        <path d="M296 186 L312 106 L328 186z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+        <rect x="298" y="86" width="28" height="22" rx="10" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+        <path d="M312 86 V58" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+        <circle class="tower-light" cx="312" cy="56" r="4" fill="#F6D27A" stroke="#3E3A39" stroke-width="2"/>
+      </g>
+      <!-- palace gate -->
+      <g>
+        <rect x="40" y="180" width="200" height="56" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+        <path d="M110 236 V204 a30 30 0 0 1 60 0 V236z" fill="#3E3A39"/>
+        <path d="M104 236 V204 a36 36 0 0 1 72 0 V236" fill="none" stroke="#3E3A39" stroke-width="3"/>
+        <rect x="20" y="236" width="240" height="14" rx="4" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+        <!-- upper floor -->
+        <rect x="64" y="146" width="152" height="34" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+        <g fill="#F6D27A" stroke="#3E3A39" stroke-width="3">
+          <rect x="84" y="156" width="14" height="24"/><rect x="133" y="156" width="14" height="24"/><rect x="182" y="156" width="14" height="24"/>
+        </g>
+        <path d="M44 146 Q100 142 140 118 Q180 142 236 146 Q226 152 216 152 H64 Q54 152 44 146z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M30 184 Q100 176 140 156 Q180 176 250 184 Q240 192 228 192 H52 Q40 192 30 184z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M110 118 Q140 96 170 118" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="140" cy="108" r="5" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+      </g>
+      <!-- ground & wave -->
+      <rect x="0" y="250" width="400" height="20" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3"/>
+      <!-- trees -->
+      <g class="wobble"><circle cx="278" cy="226" r="16" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3"/><path d="M278 242 V252" stroke="#3E3A39" stroke-width="3"/></g>
+      <g class="wobble"><circle cx="360" cy="222" r="20" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/><path d="M360 242 V252" stroke="#3E3A39" stroke-width="3"/></g>
+      <!-- gulls -->
+      <g class="gull"><path d="M262 80 q8-10 14 0 q6-10 14 0" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/></g>
+      <g class="gull gull2"><path d="M30 110 q6-8 11 0 q5-8 11 0" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/></g>
+    </svg>
+  </div>
+
+  <div class="hero-text">
+    <span class="kicker">2026.11.01 日 – 11.05 四</span>
+    <h1>首爾 5 日小旅行</h1>
+    <p>圖書館巡禮・景福宮・明洞逛街・海鷗船</p>
+  </div>
+
+  <div class="card countdown" aria-live="polite">
+    <div class="label" id="cdLabel">距離出發還有</div>
+    <div class="cd">
+      <div><b id="cdD">--</b><span>天</span></div>
+      <div><b id="cdH">--</b><span>小時</span></div>
+      <div><b id="cdM">--</b><span>分鐘</span></div>
+      <div><b id="cdS">--</b><span>秒</span></div>
+    </div>
+    <p class="cd-note">11/01（日）15:15　桃園機場起飛</p>
+  </div>
+</header>
+
+<!-- FLIGHT -->
+<section id="flight" class="wrap">
+  <h2 class="sec-title"><span class="dot"></span>航班資訊</h2>
+
+  <article class="card flight out">
+    <div class="f-head"><span>去程　11/01（日）</span><span class="pill">長榮航空 BR160</span></div>
+    <div class="route">
+      <div><div class="code">TPE</div><div class="city">桃園</div><div class="time">15:15</div></div>
+      <div class="mid">
+        <svg viewBox="0 0 54 22" aria-hidden="true"><path d="M2 11 H40" stroke="#3E3A39" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/><path d="M38 4 L52 11 L38 18 L42 11z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></svg>
+        2 小時 30 分
+      </div>
+      <div><div class="code">ICN</div><div class="city">仁川</div><div class="time">18:45</div></div>
+    </div>
+    <p class="f-meta">抵達後車程約 1 小時前往飯店。</p>
+  </article>
+
+  <article class="card flight back">
+    <div class="f-head"><span>回程　11/05（四）</span><span class="pill">長榮航空 BR159</span></div>
+    <div class="route">
+      <div><div class="code">ICN</div><div class="city">仁川</div><div class="time">19:45</div></div>
+      <div class="mid">
+        <svg viewBox="0 0 54 22" aria-hidden="true"><path d="M2 11 H40" stroke="#3E3A39" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/><path d="M38 4 L52 11 L38 18 L42 11z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></svg>
+        2 小時 55 分
+      </div>
+      <div><div class="code">TPE</div><div class="city">桃園</div><div class="time">21:40</div></div>
+    </div>
+    <p class="f-meta">晚餐於機上享用套餐。</p>
+  </article>
+
+  <article class="card meet">
+    <h3>集合資訊</h3>
+    <ul>
+      <li>11/01 中午 <b>12:45</b></li>
+      <li>桃園機場<b>第二航廈</b>，長榮航空團體 <b>20 號櫃台</b></li>
+      <li>請於起飛前 2 小時抵達，辦理行李託運</li>
+      <li>領隊：李俊霖 先生　<a href="tel:0937015629" style="color:inherit;font-weight:900">0937-015-629</a></li>
+    </ul>
+  </article>
+</section>
+
+<!-- DAYS -->
+<section id="days" class="wrap">
+  <h2 class="sec-title"><span class="dot" style="background:var(--sky)"></span>每日行程</h2>
+  <div class="tabs" role="tablist" aria-label="選擇日期" id="tabs"></div>
+  <div id="panels"></div>
+</section>
+
+<!-- TODO -->
+<section id="todo" class="wrap">
+  <h2 class="sec-title"><span class="dot" style="background:var(--green)"></span>出發前待辦</h2>
+  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+  <div class="pcount" id="pcount">0 / 0 完成</div>
+  <ul class="todo" id="todoList"></ul>
+  <button class="reset" id="resetBtn" type="button">全部重設</button>
+</section>
+
+<!-- HOTEL -->
+<section id="hotel" class="wrap hotel">
+  <h2 class="sec-title"><span class="dot" style="background:var(--coral)"></span>住宿資訊</h2>
+  <div class="hotel-art" role="img" aria-label="插圖：飯店大樓與游泳池">
+    <svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="190" fill="#B9DAA5"/>
+      <g class="cloud1"><path d="M250 40 q0-14 16-14 q8-10 22-4 q18 0 18 14 q10 2 8 10 H244 q-8-2-4-6z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></g>
+      <g class="sun"><circle cx="60" cy="42" r="22" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/></g>
+      <rect x="110" y="40" width="130" height="130" rx="10" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+      <rect x="100" y="30" width="150" height="16" rx="8" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+      <g fill="#A8D3E6" stroke="#3E3A39" stroke-width="3">
+        <rect x="124" y="60" width="20" height="18" rx="4"/><rect x="160" y="60" width="20" height="18" rx="4"/><rect x="196" y="60" width="20" height="18" rx="4"/>
+        <rect x="124" y="92" width="20" height="18" rx="4"/><rect x="160" y="92" width="20" height="18" rx="4" fill="#F6D27A"/><rect x="196" y="92" width="20" height="18" rx="4"/>
+        <rect x="124" y="124" width="20" height="18" rx="4"/><rect x="196" y="124" width="20" height="18" rx="4"/>
+      </g>
+      <rect x="160" y="136" width="20" height="34" rx="6" fill="#3E3A39"/>
+      <rect x="250" y="130" width="120" height="40" rx="14" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+      <g class="wave"><path d="M262 148 q8-8 16 0 t16 0 t16 0 t16 0 t16 0" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/></g>
+      <rect x="0" y="170" width="400" height="20" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+      <g class="wobble"><circle cx="56" cy="146" r="20" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/><path d="M56 166 V172" stroke="#3E3A39" stroke-width="3"/></g>
+    </svg>
+  </div>
+  <article class="card">
+    <h3>HOTEL MARINABAY SEOUL　首爾濱海灣飯店</h3>
+    <div class="stars" aria-label="四星級">★★★★</div>
+    <ul class="info">
+      <li><b>地址</b>210-50 Arayuk-ro 152beon-gil, Gochon-eup, Gimpo-si, Gyeonggi-do</li>
+      <li><b>電話</b><a href="tel:+82215778118" style="color:inherit;font-weight:900">+82 2-1577-8118</a></li>
+      <li><b>入住</b>11/01 – 11/04 連住 4 晚，11/05 當天直接前往機場返國</li>
+    </ul>
+    <div class="chips">
+      <span>免費機場接駁車</span><span>免費 Wi-Fi</span><span>健身房</span><span>洗衣設施</span>
+      <span>室內泳池</span><span>室外泳池（季節性）</span><span>24 小時櫃台</span><span>自助早餐（付費）</span><span>424 間客房</span>
+    </div>
+    <div class="nights" aria-label="每晚住宿">
+      <div>11/01<br>飯店</div><div>11/02<br>飯店</div><div>11/03<br>飯店</div><div>11/04<br>飯店</div><div class="home">11/05<br>溫暖的家</div>
+    </div>
+  </article>
+</section>
+</main>
+
+<footer>
+  <svg viewBox="0 0 90 60" aria-hidden="true"><circle cx="45" cy="30" r="26" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/><circle cx="35" cy="27" r="3" fill="#3E3A39"/><circle cx="55" cy="27" r="3" fill="#3E3A39"/><path d="M38 38 q7 7 14 0" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/><circle cx="27" cy="36" r="4" fill="#F2A497"/><circle cx="63" cy="36" r="4" fill="#F2A497"/></svg>
+  <p>旅途愉快，平安回家！</p>
+</footer>
+
+<script>
+const DAYS=[
+{n:1,date:"11/01",wd:"日",title:"出發，飛往首爾",sub:"桃園 → 仁川 → 金浦飯店",
+ meals:["早｜無","午｜無","晚｜機上簡餐"],
+ items:[
+  {t:"stop",when:"12:45",name:"桃園機場集合",en:"第二航廈・長榮航空團體 20 號櫃台",desc:"由領隊協助辦理登機與行李託運。"},
+  {t:"leg",tag:"plane",label:"飛機",dur:"BR160　15:15 起飛｜2 小時 30 分"},
+  {t:"stop",when:"18:45",name:"抵達仁川國際機場",en:"Incheon Airport",desc:"駐韓代表熱情迎接，踏入期待已久的韓國。",remind:"購買 WOWPASS 卡 & 儲值"},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1 小時"},
+  {t:"stop",name:"入住金浦 Hotel Marinabay Seoul",en:"4 ★",desc:"好好休息，明天開始圖書館巡禮。"}
+ ]},
+{n:2,date:"11/02",wd:"一",title:"蝸牛圖書館與星空書牆",sub:"京畿・水原・安養・金浦",
+ meals:["早｜酒店內","午｜自理（方便逛街）","晚｜炸醬麵＋糖醋肉（四人一份）"],
+ items:[
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1 小時"},
+  {t:"stop",name:"京畿圖書館",en:"Gyeonggi Library",desc:"耗時 9 年興建，2025 年 10 月底開幕，為韓國規模最大的地方公立圖書館。因圓柱螺旋造型，被暱稱為「蝸牛圖書館」。建築共 9 層(B4–5F)，總面積達 27,795 平方公尺。\n特色空間與服務：\n- B1｜書工房與 AI 體驗：結合數位排版、傳統裝幀工藝及 AI 科技應用。\n- 1F｜閱讀與展示空間：設有閱讀休憩區、環境主題展區及獨立書店專區。\n- 5F｜Book Therapy 圖書療癒：針對 5–12 歲兒童，以 AI 分析繪畫並結合心理專業評估，提供個人化閱讀建議與繪本推薦。",must:true},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 30 分鐘"},
+  {t:"stop",name:"水原星空圖書館",en:"Starfield Library（Starfield 購物中心）",desc:"2024 年 1 月 26 日開幕，位於購物中心 4–7 樓，高達 22 公尺，藏書約 7 萬冊。以挑高 13 公尺的開放式設計，串聯各樓層，打造結合閱讀、休閒與文化交流的公共空間。\n特色空間與服務：\n- 開放式閱讀空間：跨樓層挑高設計，從各樓層皆可欣賞圖書館景觀。\n- 閱讀與休憩：各樓層設有咖啡廳、舒適座位及閱讀區，提供閱讀、聆聽音樂與放鬆的空間。\n- 藝文交流活動：定期舉辦表演與講座，讓民眾在購物之餘也能享受文化藝術。",must:true},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 40 分鐘"},
+  {t:"stop",name:"韓國聖潔大學圖書館",en:"Sungkyul University",desc:"聖潔大學創立於 1962 年，設有 7 所學院、5 所研究生院，約 5,900 名學生及 167 名專任教師(2026 年)。\n圖書館新館於 2010 年啟用，共 8 層(2–6F)，實體館藏逾 40 萬冊，其中約 18 萬冊存放於自動化密集書庫。\n特色空間與服務：\n- 自動化書庫：韓國大學首創自動書庫系統，提升館藏儲存與管理效率。\n- 6F｜古書室：典藏珍貴神學與宗教研究文獻，為韓國重要的神學研究資源。\n- 學術研究支援：提供豐富的實體館藏與專業研究資源，支援教學及學術研究。",must:true},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1 小時"},
+  {t:"stop",name:"金浦現代 Premium Outlet",en:"Gimpo Hyundai Premium Outlet",desc:"超過 350 個品牌，折扣約 4～9 折。"},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 5 分鐘"},
+  {t:"stop",name:"返回飯店",en:"Hotel Marinabay Seoul",desc:"晚餐享用炸醬麵與糖醋肉。"}
+ ]},
+{n:3,date:"11/03",wd:"二",title:"和平書城與梨花校園",sub:"坡州・梨花女大・樂天超市",
+ meals:["早｜酒店內","午｜部隊鍋＋炒飯＋拉麵","晚｜孔陵一隻雞"],
+ items:[
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1.5 小時"},
+  {t:"stop",name:"坡州文山圖書館",en:"Paju Munsan Library",desc:"圖書館創立於 1994 年，斥資 250 億韓元改建，於 2025 年 9 月 29 日遷至新館，轉型為「未來型智慧圖書館」。建築共 4 層（B1–3F），面積約 5,450 平方公尺，藏書約 11 萬冊。\n\n特色空間與服務：\n- 1F｜文化交流與自動化書庫：設有文化交流空間及連通地下樓層的自動化書庫。\n- 2F｜兒童閱讀空間：提供幼兒與兒童專屬閱讀資源。\n- 3F｜綜合與青少年資料室：提供圖書期刊閱覽及自修空間。\n- AI 智慧服務：運用 AI 機器人提供借還書、館內導引及書籍推薦。\n- 沉浸式數位體驗：設有大型媒體牆、互動式故事書及數位水族館，結合閱讀與科技體驗。\n- 特色閱讀環境：設置「和平特化書架」及噪音中和系統，融合在地文化與舒適閱讀體驗。",must:true},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1.5 小時"},
+  {t:"stop",name:"梨花女子大學圖書館",en:"Ewha Womans University",desc:"梨花女子大學的排名為2027 QS 全球488名，亞洲69名。設有 14 所大學部學院、1 所一般研究生院及 15 所專業／特殊研究生院，大學部學生 15,191 人、研究生 6,206 人，國際留學生約 2,089 人，教職員約 1,258 人。\n圖書館始於 1923 年，1984 年遷至現址「梨花百週年紀念圖書館」。除中央圖書館外，另設有 5 間專業分館，實體藏書逾 150 萬冊。\n特色館藏與服務：\n- 專業分館：涵分別為工程、法律、神學、音樂及醫學五間\n- 電子書閱讀器借閱：提供電子書閱讀器借用服務。\n- 個人化閱讀推薦：分析借閱紀錄與閱讀偏好，提供專業領域、季節及主題選書推薦。\n- 24 小時自修室：位於中央圖書館地下室，分設筆電區與閱讀區；23:00–05:00 禁止進出，以維護安全。",must:true},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 30 分鐘"},
+  {t:"stop",name:"樂天超市",en:"Lotte Mart",desc:"伴手禮採買：烏龜玉米脆片、牛奶米餅、HBAF 堅果、海太蜂蜜奶油洋芋片。單筆滿 15,000 韓元可憑護照現場退稅。"},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 40 分鐘"},
+  {t:"stop",name:"返回飯店",en:"Hotel Marinabay Seoul",desc:"晚餐享用孔陵一隻雞。"}
+ ]},
+{n:4,date:"11/04",wd:"三",title:"醫學圖書館與首爾市區",sub:"峨山・清溪川・光化門・明洞",
+ meals:["早｜酒店內","午｜豬腳風味餐","晚｜自理（方便逛街）"],
+ items:[
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1 小時"},
+  {t:"stop",name:"峨山醫學中心圖書館",en:"Asan Medical Center Library",desc:"峨山醫學中心圖書館隸屬於首爾峨山醫院（2025 年韓國最佳醫院第 1 名、全球第 25 名）及蔚山大學醫學院，位於醫院教育研究館內。醫學院約有 358 名學生、744 名教師，醫學中心員工逾 9,000 人。\n圖書館始於 1989 年，1991 年改制為醫學圖書館，並於 2023 年 12 月重新開幕。\n特色館藏與資源：\n- 醫學專業館藏：約 3.7 萬冊圖書及 4.8 萬冊合訂本期刊。\n- 電子學術資源：提供逾 15,400 種電子期刊及 50 多個醫學資料庫。",must:true},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1 小時"},
+  {t:"stop",name:"清溪川",en:"Cheonggyecheon",desc:"全長約 11 公里的都市河川，2003 年起復育，是城市再生的代表地標。"},
+  {t:"leg",tag:"walk",label:"步行",dur:""},
+  {t:"stop",name:"光化門廣場",en:"Gwanghwamun Square",desc:"景福宮正門前的開闊廣場。"},
+  {t:"leg",tag:"rail",label:"自由活動",dur:""},
+  {t:"stop",name:"明洞自由逛街",en:"Myeongdong",desc:"OLIVE YOUNG 旗艦店、COVERNAT、LINE FRIENDS SQUARE、BUTTER SHOP。也是兌換韓元匯率較好的地區。晚餐請自理。",must:true}
+ ]},
+{n:5,date:"11/05",wd:"四",title:"宮殿、市場與海鷗，回家",sub:"景福宮・廣藏市場・森林咖啡館・仁川",
+ meals:["早｜酒店內","午｜馬鈴薯燉豬骨湯","晚｜機上套餐"],
+ items:[
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 45 分鐘"},
+  {t:"stop",name:"景福宮＋韓服體驗",en:"Gyeongbokgung",desc:"1395 年興建的朝鮮王朝法宮，規模最大、建築最美。換上華麗新式韓服，在宮廷裡散步拍照。"},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 10 分鐘"},
+  {t:"stop",name:"廣藏市場",en:"Gwangjang Market",desc:"創立於 1905 年，韓國第一個常設市場。"},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1.5 小時"},
+  {t:"stop",name:"Forest Outings 森林咖啡館",en:"Forest Outings",desc:"三層樓高的巨型植物園咖啡廳，有熱帶植物、小湖泊、拱橋與空中花園。"},
+  {t:"leg",tag:"ship",label:"渡輪",dur:"月尾島"},
+  {t:"stop",name:"海鷗船",en:"Wolmido Ferry",desc:"出海餵海鷗，近距離看牠們掠過海面。"},
+  {t:"leg",tag:"bus",label:"遊覽車",dur:"約 45 分鐘"},
+  {t:"stop",when:"19:45",name:"仁川機場　搭機返台",en:"BR159　21:40 抵達桃園",desc:"辦理退稅與登機。回到溫暖的家。"}
+ ]}
+];
+const TAGCLS={bus:"bus",plane:"plane",walk:"walk",ship:"ship",rail:"rail"};
+const tabs=document.getElementById("tabs"),panels=document.getElementById("panels");
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+DAYS.forEach((d,i)=>{
+  const b=document.createElement("button");
+  b.className="tab";b.type="button";b.role="tab";b.id="tab"+i;
+  b.setAttribute("aria-controls","panel"+i);
+  b.innerHTML=`<small>Day ${d.n}</small><strong>${d.date}</strong><small>週${d.wd}</small>`;
+  b.addEventListener("click",()=>select(i,true));
+  b.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight")select(Math.min(i+1,DAYS.length-1),true,true);
+    if(e.key==="ArrowLeft")select(Math.max(i-1,0),true,true);
+  });
+  tabs.appendChild(b);
+  const p=document.createElement("div");
+  p.id="panel"+i;p.setAttribute("role","tabpanel");p.setAttribute("aria-labelledby","tab"+i);p.hidden=true;
+  const tl=d.items.map(it=>{
+    if(it.t==="leg")return `<li class="leg"><span class="tag ${TAGCLS[it.tag]}">${it.label}</span>${it.dur?`<span class="dur">${esc(it.dur)}</span>`:""}</li>`;
+    return `<li class="${it.must?"must":""}"><div class="stop ${it.must?"must":""}">
+      ${it.when?`<div class="when">${it.when}</div>`:""}
+      <h4>${esc(it.name)}${it.must?'<span class="must-tag">必去</span>':""}</h4>
+      <div class="en">${esc(it.en)}</div><p>${esc(it.desc)}</p>${it.remind?`<div class="remind"><b>📌 大芬提醒．提醒大芬</b>${esc(it.remind)}</div>`:""}</div></li>`;
+  }).join("");
+  p.innerHTML=`<div class="day-head"><div class="day-badge"><div><small>DAY</small>${d.n}</div></div>
+    <div><h3>${d.title}</h3><p>${d.sub}</p></div></div>
+    ${i>0?`<div class="gather"><label for="gt${i}">⏰ 早上集合時間</label><input type="time" id="gt${i}" data-day="${i}"><span class="hint">請依領隊通知填入，會自動記住</span></div>`:`<div class="gather"><label>⏰ 集合</label><span>12:45　桃園機場第二航廈</span></div>`}
+    <div class="meals">${d.meals.map(m=>{const [a,b2]=m.split("｜");return `<div><b>${a}</b>${b2}</div>`}).join("")}</div>
+    <ol class="timeline">${tl}</ol>`;
+  panels.appendChild(p);
+});
+const GKEY="seoul2026-gather";
+let gsaved={};try{gsaved=JSON.parse(localStorage.getItem(GKEY)||"{}")}catch(e){}
+document.querySelectorAll(".gather input").forEach(inp=>{
+  inp.value=gsaved[inp.dataset.day]||"";
+  inp.addEventListener("change",()=>{
+    gsaved[inp.dataset.day]=inp.value;
+    try{localStorage.setItem(GKEY,JSON.stringify(gsaved))}catch(e){}
+  });
+});
+function select(i,user,focus){
+  DAYS.forEach((_,k)=>{
+    const t=document.getElementById("tab"+k),p=document.getElementById("panel"+k);
+    const on=k===i;
+    t.setAttribute("aria-selected",on);t.tabIndex=on?0:-1;
+    if(on){
+      p.hidden=false;
+      if(user){
+        p.style.animation="none";void p.offsetWidth;p.style.animation="";
+        t.classList.remove("pop");void t.offsetWidth;t.classList.add("pop");
+      }
+      t.scrollIntoView({inline:"center",block:"nearest",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+      if(focus)t.focus();
+    }else p.hidden=true;
+  });
+}
+// 預設：旅行期間顯示當日，否則第 1 天
+(function(){
+  const now=new Date(),y=now.getFullYear();
+  let idx=0;
+  DAYS.forEach((d,k)=>{const [m,dd]=d.date.split("/").map(Number);if(y===2026&&now.getMonth()+1===m&&now.getDate()===dd)idx=k});
+  select(idx,false);
+})();
+
+// 倒數
+const target=new Date("2026-11-01T15:15:00+08:00").getTime();
+const $=id=>document.getElementById(id);
+function tick(){
+  let diff=target-Date.now();
+  if(diff<=0){
+    $("cdLabel").textContent="旅程已經開始，玩得開心！";
+    ["cdD","cdH","cdM","cdS"].forEach(k=>$(k).textContent="0");return;
+  }
+  const s=Math.floor(diff/1000);
+  $("cdD").textContent=Math.floor(s/86400);
+  $("cdH").textContent=String(Math.floor(s%86400/3600)).padStart(2,"0");
+  $("cdM").textContent=String(Math.floor(s%3600/60)).padStart(2,"0");
+  $("cdS").textContent=String(s%60).padStart(2,"0");
+}
+tick();setInterval(tick,1000);
+
+// 待辦清單
+const TODO=[
+ ["passport","個人護照","如未繳交旅行社，請務必自行攜帶"],
+ ["won","兌換韓元","請務必記得兌換（明洞匯率較佳）"],
+ ["card","信用卡","Visa、Mastercard"],
+ ["luggage","確認行李規定","託運 1 件 23 公斤；手提 1 件 10 公斤"],
+ ["power","行動電源放手提","不可託運；100Wh 以下限帶 2 個；飛行中不可充電"],
+ ["liquid","液體容器","手提液體每瓶不超過 100ml，裝入 1 公升透明夾鏈袋"],
+ ["net","韓國網路卡或開通漫遊","手機網路務必先設定好"],
+ ["charger","充電器","手機、相機等電子產品"],
+ ["clothes","個人衣物","早晚溫差大，建議帶薄長袖、薄外套"],
+ ["sun","防曬帽、墨鏡、折疊傘","可兼顧防曬與防雨"],
+ ["skin","保養品、化妝品","可分裝成小瓶，不佔空間"],
+ ["med","個人常備藥品","感冒藥、止痛藥、腸胃藥"],
+ ["toiletry","牙膏、牙刷","響應環保，請自行攜帶"],
+ ["slipper","拖鞋、涼鞋","方便在飯店房間使用"],
+ ["sewing","針線包、指甲剪","以備不時之需"],
+ ["bag","備用購物袋","採買伴手禮用"],
+ ["qcode","填寫 Q-CODE 健康問卷","事先線上填寫，或入境時填紙本"],
+ ["meat","不攜帶肉類製品","韓國與臺灣皆嚴格禁止，違者重罰"]
+];
+const KEY="seoul2026-todo";
+let saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+const list=$("todoList");
+const CHECK='<svg viewBox="0 0 18 18"><path d="M3 9.5 7.5 14 15 4" fill="none" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+TODO.forEach(([id,t,s])=>{
+  const li=document.createElement("li");
+  li.innerHTML=`<label><input type="checkbox" id="c_${id}" ${saved[id]?"checked":""}><span class="box">${CHECK}</span><span class="txt"><b>${t}</b><small>${s}</small></span></label>`;
+  li.querySelector("input").addEventListener("change",e=>{saved[id]=e.target.checked;persist();update()});
+  list.appendChild(li);
+});
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(e){}}
+function update(){
+  const n=TODO.filter(([id])=>saved[id]).length;
+  $("bar").style.width=(n/TODO.length*100)+"%";
+  $("pcount").textContent=`${n} / ${TODO.length} 完成`;
+}
+$("resetBtn").addEventListener("click",()=>{
+  saved={};persist();list.querySelectorAll("input").forEach(i=>i.checked=false);update();
+});
+update();
+</script>
+</body>
+</html>
