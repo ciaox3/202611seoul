@@ -42,6 +42,7 @@ nav li:nth-child(2) a{background:var(--sky)}
 nav li:nth-child(3) a{background:var(--yellow)}
 nav li:nth-child(4) a{background:var(--green)}
 nav li:nth-child(5) a{background:var(--coral)}
+nav li:nth-child(6) a{background:var(--sky)}
 nav a:active{transform:scale(.92)}
 nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px dashed var(--ink);outline-offset:3px}
 
@@ -176,6 +177,30 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .txt b{display:block;line-height:1.4}
 .txt small{font-size:.8rem;font-weight:700}
 .reset{margin-top:14px;font-family:inherit;font-weight:900;color:var(--ink);background:var(--sky);border:var(--line);border-radius:999px;padding:4px 18px;cursor:pointer}
+.shop-card{margin-bottom:16px;scroll-margin-top:76px}
+.shop-card.oy{background:var(--coral)}
+.shop-card.daiso{background:var(--yellow)}
+.shop-card.lotte{background:var(--green)}
+.shop-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}
+.shop-head h3{font-size:1.2rem}
+.shop-head small{display:block;font-size:.78rem;font-weight:700;line-height:1.4}
+.shop-count{flex:none;border:var(--line);border-radius:999px;background:var(--paper);padding:0 12px;font-weight:900;font-size:.85rem}
+.shop-form{display:flex;gap:8px;margin-bottom:10px}
+.shop-form input{flex:1;min-width:0;font-family:inherit;font-weight:700;font-size:1rem;color:var(--ink);background:var(--paper);border:var(--line);border-radius:999px;padding:4px 14px}
+.shop-form button{flex:none;font-family:inherit;font-weight:900;color:var(--ink);background:var(--paper);border:var(--line);border-radius:999px;padding:4px 16px;cursor:pointer}
+.shop-form button:active{transform:scale(.92)}
+.shop-list{list-style:none;display:grid;gap:8px}
+.shop-list li{display:flex;gap:8px;align-items:stretch}
+.shop-list label{flex:1;display:flex;gap:12px;align-items:center;border:var(--line);border-radius:20px;padding:8px 14px;cursor:pointer;background:var(--paper)}
+.shop-list input[type=checkbox]{position:absolute;opacity:0;pointer-events:none}
+.shop-list input:checked+.box{background:var(--yellow)}
+.shop-list input:checked+.box svg{opacity:1;transform:scale(1);transition:transform .35s cubic-bezier(.3,1.8,.5,1)}
+.shop-list input:checked~.txt{text-decoration:line-through;text-decoration-thickness:2px;opacity:.55}
+.shop-list input:focus-visible+.box{outline:3px dashed var(--ink);outline-offset:3px}
+.shop-list .del{flex:none;width:40px;font-family:inherit;font-weight:900;font-size:1.1rem;color:var(--ink);background:var(--paper);border:var(--line);border-radius:16px;cursor:pointer}
+.shop-empty{border:3px dashed var(--ink);border-radius:20px;padding:8px 14px;font-size:.88rem;font-weight:700;background:var(--paper)}
+.shoplinks{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.shoplinks a{display:inline-block;text-decoration:none;color:var(--ink);border:var(--line);border-radius:999px;background:var(--green);padding:0 12px;font-size:.82rem;font-weight:900}
 
 /* hotel */
 .hotel-art{border:var(--line);border-radius:var(--r);overflow:hidden;background:var(--green);margin-bottom:14px}
@@ -226,6 +251,7 @@ footer svg{width:90px;height:auto}
     <li><a href="#flight">航班</a></li>
     <li><a href="#days">行程</a></li>
     <li><a href="#todo">確認</a></li>
+    <li><a href="#shop">待購</a></li>
     <li><a href="#hotel">住宿</a></li>
   </ul>
 </nav>
@@ -288,7 +314,7 @@ footer svg{width:90px;height:auto}
   <div class="hero-text">
     <span class="kicker">2026.11.01 日 – 11.05 四</span>
     <h1>首爾 5 日小旅行</h1>
-    <p>圖書館巡禮・景福宮・明洞逛街・海鷗船</p>
+    <p>圖書館巡禮－大芬專用版</p>
   </div>
 
   <div class="card wxnow" id="wxNow" aria-live="polite">
@@ -352,6 +378,12 @@ footer svg{width:90px;height:auto}
   <div class="pcount" id="pcount">0 / 0 完成</div>
   <ul class="todo" id="todoList"></ul>
   <button class="reset" id="resetBtn" type="button">全部重設</button>
+</section>
+
+<!-- SHOP -->
+<section id="shop" class="wrap">
+  <h2 class="sec-title"><span class="dot" style="background:var(--coral)"></span>待購清單</h2>
+  <div id="shopCards"></div>
 </section>
 
 <!-- HOTEL -->
@@ -433,7 +465,7 @@ const DAYS=[
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 1.5 小時"},
   {t:"stop",name:"梨花女子大學圖書館",en:"Ewha Womans University",desc:"梨花女子大學的排名為2027 QS 全球488名，亞洲69名。設有 14 所大學部學院、1 所一般研究生院及 15 所專業／特殊研究生院，大學部學生 15,191 人、研究生 6,206 人，國際留學生約 2,089 人，教職員約 1,258 人。\n圖書館始於 1923 年，1984 年遷至現址「梨花百週年紀念圖書館」。除中央圖書館外，另設有 5 間專業分館，實體藏書逾 150 萬冊。\n特色館藏與服務：\n- 專業分館：涵分別為工程、法律、神學、音樂及醫學五間\n- 電子書閱讀器借閱：提供電子書閱讀器借用服務。\n- 個人化閱讀推薦：分析借閱紀錄與閱讀偏好，提供專業領域、季節及主題選書推薦。\n- 24 小時自修室：位於中央圖書館地下室，分設筆電區與閱讀區；23:00–05:00 禁止進出，以維護安全。",must:true},
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 30 分鐘"},
-  {t:"stop",name:"樂天超市",en:"Lotte Mart",desc:"伴手禮採買：烏龜玉米脆片、牛奶米餅、HBAF 堅果、海太蜂蜜奶油洋芋片。單筆滿 15,000 韓元可憑護照現場退稅。"},
+  {t:"stop",name:"樂天超市",en:"Lotte Mart",desc:"伴手禮採買：烏龜玉米脆片、牛奶米餅、HBAF 堅果、海太蜂蜜奶油洋芋片。單筆滿 15,000 韓元可憑護照現場退稅。",shop:[["lotte","樂天超市"]]},
   {t:"leg",tag:"bus",label:"遊覽車",dur:"約 40 分鐘"},
   {t:"stop",name:"返回飯店",en:"Hotel Marinabay Seoul",desc:"晚餐享用孔陵一隻雞。"}
  ]},
@@ -447,7 +479,7 @@ const DAYS=[
   {t:"leg",tag:"walk",label:"步行",dur:""},
   {t:"stop",name:"光化門廣場",en:"Gwanghwamun Square",desc:"景福宮正門前的開闊廣場。"},
   {t:"leg",tag:"rail",label:"自由活動",dur:""},
-  {t:"stop",name:"明洞自由逛街",en:"Myeongdong",desc:"OLIVE YOUNG 旗艦店、COVERNAT、LINE FRIENDS SQUARE、BUTTER SHOP。也是兌換韓元匯率較好的地區。晚餐請自理。",must:true}
+  {t:"stop",name:"明洞自由逛街",en:"Myeongdong",desc:"OLIVE YOUNG 旗艦店、COVERNAT、LINE FRIENDS SQUARE、BUTTER SHOP。也是兌換韓元匯率較好的地區。晚餐請自理。",must:true,shop:[["oy","Olive Young"],["daiso","大創"]]}
  ]},
 {n:5,date:"11/05",wd:"四",title:"宮殿、市場與海鷗，回家",sub:"景福宮・廣藏市場・森林咖啡館・仁川",
  meals:["早｜酒店內","午｜馬鈴薯燉豬骨湯","晚｜機上套餐"],
@@ -485,7 +517,7 @@ DAYS.forEach((d,i)=>{
     return `<li class="${it.must?"must":""}"><div class="stop ${it.must?"must":""}">
       ${it.when?`<div class="when">${it.when}</div>`:""}
       <h4>${esc(it.name)}${it.must?'<span class="must-tag">必去</span>':""}</h4>
-      <div class="en">${esc(it.en)}</div><p>${esc(it.desc)}</p>${it.remind?`<div class="remind"><b>📌 大芬提醒．提醒大芬</b>${esc(it.remind)}</div>`:""}</div></li>`;
+      <div class="en">${esc(it.en)}</div><p>${esc(it.desc)}</p>${it.remind?`<div class="remind"><b>📌 大芬提醒．提醒大芬</b>${esc(it.remind)}</div>`:""}${it.shop?`<div class="shoplinks">${it.shop.map(s=>`<a href="#shop-${s[0]}">🛒 ${s[1]} 待購清單</a>`).join("")}</div>`:""}</div></li>`;
   }).join("");
   p.innerHTML=`<div class="day-head"><div class="day-badge"><div><small>DAY</small>${d.n}</div></div>
     <div><h3>${d.title}</h3><p>${d.sub}</p></div></div>
@@ -650,6 +682,46 @@ function loadWx(){
   });
 }
 loadWx();
+
+// 待購清單（核選式，可自行新增商品）
+const STORES=[
+  {id:"oy",name:"Olive Young",note:"美妝保養｜明洞旗艦店（Day 4 自由逛街）"},
+  {id:"daiso",name:"大創 Daiso",note:"生活雜貨、小物"},
+  {id:"lotte",name:"樂天超市 Lotte Mart",note:"零食伴手禮｜Day 3，滿 15,000 韓元可現場退稅"}
+];
+const SKEY="seoul2026-shop";
+let shop={};try{shop=JSON.parse(localStorage.getItem(SKEY)||"{}")}catch(e){}
+const saveShop=()=>{try{localStorage.setItem(SKEY,JSON.stringify(shop))}catch(e){}};
+function renderShop(){
+  $("shopCards").innerHTML=STORES.map(s=>{
+    const items=shop[s.id]||[];
+    const done=items.filter(i=>i.done).length;
+    return `<article class="card shop-card ${s.id}" id="shop-${s.id}">
+      <div class="shop-head"><div><h3>${esc(s.name)}</h3><small>${esc(s.note)}</small></div><span class="shop-count">${done} / ${items.length}</span></div>
+      <form class="shop-form" data-store="${s.id}"><input type="text" maxlength="40" placeholder="輸入想買的商品…" aria-label="${esc(s.name)} 新增商品" required><button type="submit">新增</button></form>
+      ${items.length?`<ul class="shop-list">${items.map(i=>`<li><label><input type="checkbox" data-store="${s.id}" data-id="${i.id}" ${i.done?"checked":""}><span class="box">${CHECK}</span><span class="txt"><b>${esc(i.t)}</b></span></label><button type="button" class="del" data-store="${s.id}" data-id="${i.id}" aria-label="刪除 ${esc(i.t)}">×</button></li>`).join("")}</ul>`:'<div class="shop-empty">還沒有項目，在上方輸入商品名稱就能新增。</div>'}
+    </article>`;
+  }).join("");
+}
+$("shopCards").addEventListener("submit",e=>{
+  e.preventDefault();
+  const f=e.target,id=f.dataset.store,v=f.querySelector("input").value.trim();
+  if(!v)return;
+  (shop[id]=shop[id]||[]).push({id:Date.now()+""+Math.floor(Math.random()*1000),t:v,done:false});
+  saveShop();renderShop();
+  const inp=document.querySelector(`#shop-${id} .shop-form input`);if(inp)inp.focus();
+});
+$("shopCards").addEventListener("change",e=>{
+  const t=e.target;if(t.type!=="checkbox")return;
+  const it=(shop[t.dataset.store]||[]).find(i=>i.id===t.dataset.id);
+  if(it){it.done=t.checked;saveShop();renderShop()}
+});
+$("shopCards").addEventListener("click",e=>{
+  const b=e.target.closest(".del");if(!b)return;
+  shop[b.dataset.store]=(shop[b.dataset.store]||[]).filter(i=>i.id!==b.dataset.id);
+  saveShop();renderShop();
+});
+renderShop();
 </script>
 </body>
 </html>
