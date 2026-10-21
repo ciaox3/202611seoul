@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="2026/11/01–11/05 首爾圖書館參訪五日行程：航班、每日行程、待辦清單與住宿資訊。">
+<meta name="description" content="2026/11/01–11/05 首爾圖書館參訪五日行程：航班、每日行程、確認清單與住宿資訊。">
 <meta name="theme-color" content="#FFFCF6">
 <title>首爾五日小旅行｜2026.11.01–11.05</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,13 +53,6 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .hero-text .kicker{display:inline-block;border:var(--line);border-radius:999px;background:var(--yellow);padding:0 14px;font-weight:900;font-size:.9rem}
 .hero-text h1{font-size:2.1rem;margin:10px 0 4px;letter-spacing:.04em}
 .hero-text p{font-size:.95rem}
-.countdown{margin-top:16px;background:var(--green)}
-.countdown .label{text-align:center;font-weight:900;margin-bottom:10px}
-.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.cd div{background:var(--paper);border:var(--line);border-radius:18px;text-align:center;padding:6px 0 4px}
-.cd b{display:block;font-size:1.7rem;font-weight:900;line-height:1.2;font-variant-numeric:tabular-nums}
-.cd span{font-size:.75rem;font-weight:700}
-.cd-note{text-align:center;font-size:.85rem;margin-top:10px}
 
 /* flights */
 .flight{margin-bottom:16px;position:relative;overflow:hidden}
@@ -72,7 +65,11 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .route .city{font-size:.8rem}
 .route .time{font-weight:900;font-size:1.1rem}
 .mid{display:flex;flex-direction:column;align-items:center;font-size:.7rem;font-weight:700}
-.mid svg{width:54px;height:22px}
+.mid svg{width:84px;height:30px;overflow:visible}
+.mp{animation:mpfly 3.6s ease-in-out infinite}
+.mpd{animation:mpdash 1s linear infinite}
+@keyframes mpfly{0%{transform:translate(0,2px);opacity:0}15%{opacity:1}50%{transform:translate(32px,-4px)}85%{opacity:1}100%{transform:translate(62px,2px);opacity:0}}
+@keyframes mpdash{to{stroke-dashoffset:-8}}
 .f-meta{margin-top:10px;font-size:.9rem}
 .meet{background:var(--yellow)}
 .meet h3{margin-bottom:6px}
@@ -100,7 +97,7 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .gather label{flex:none}
 .gather input{font-family:inherit;font-weight:900;font-size:1.05rem;color:var(--ink);background:var(--paper);border:var(--line);border-radius:14px;padding:2px 10px;min-width:120px}
 .gather .hint{font-size:.78rem;font-weight:700;flex-basis:100%}
-.wxnow{margin-top:14px;background:var(--sky)}
+.wxnow{margin-top:16px;background:var(--green)}
 .wxnow .row{display:flex;align-items:center;gap:12px}
 .wxnow svg,.wx svg{flex:none;width:52px;height:52px}
 .wxnow .big{font-size:2rem;font-weight:900;line-height:1.1}
@@ -228,7 +225,7 @@ footer svg{width:90px;height:auto}
     <li><a href="#top">首頁</a></li>
     <li><a href="#flight">航班</a></li>
     <li><a href="#days">行程</a></li>
-    <li><a href="#todo">待辦</a></li>
+    <li><a href="#todo">確認</a></li>
     <li><a href="#hotel">住宿</a></li>
   </ul>
 </nav>
@@ -294,17 +291,6 @@ footer svg{width:90px;height:auto}
     <p>圖書館巡禮・景福宮・明洞逛街・海鷗船</p>
   </div>
 
-  <div class="card countdown" aria-live="polite">
-    <div class="label" id="cdLabel">距離出發還有</div>
-    <div class="cd">
-      <div><b id="cdD">--</b><span>天</span></div>
-      <div><b id="cdH">--</b><span>小時</span></div>
-      <div><b id="cdM">--</b><span>分鐘</span></div>
-      <div><b id="cdS">--</b><span>秒</span></div>
-    </div>
-    <p class="cd-note">11/01（日）15:15　桃園機場起飛</p>
-  </div>
-
   <div class="card wxnow" id="wxNow" aria-live="polite">
     <div class="ttl">🌤 首爾現在天氣</div>
     <div class="sub">載入中…</div>
@@ -318,12 +304,12 @@ footer svg{width:90px;height:auto}
   <article class="card flight out">
     <div class="f-head"><span>去程　11/01（日）</span><span class="pill">長榮航空 BR160</span></div>
     <div class="route">
-      <div><div class="code">TPE</div><div class="city">桃園</div><div class="time">15:15</div></div>
+      <div><div class="code">TPE</div><div class="city">桃園 (T2)</div><div class="time">15:15</div></div>
       <div class="mid">
-        <svg viewBox="0 0 54 22" aria-hidden="true"><path d="M2 11 H40" stroke="#3E3A39" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/><path d="M38 4 L52 11 L38 18 L42 11z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 84 30" aria-hidden="true"><path class="mpd" d="M4 20 H80" stroke="#3E3A39" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round" fill="none"/><g transform="translate(2 10)"><g class="mp"><path d="M6 -2 L3 -9 H8 L13 -2z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2" stroke-linejoin="round"/><path d="M0 2 q0-5 6-5 H16 q6 0 9 5 q-3 5-9 5 H6 q-6 0-6-5z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/><path d="M0 -2 L-3 -8 H3 L6 -2z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2" stroke-linejoin="round"/><circle cx="17" cy="1.5" r="1.6" fill="#3E3A39"/><circle cx="11" cy="1.5" r="1.6" fill="#3E3A39"/></g></g></svg>
         2 小時 30 分
       </div>
-      <div><div class="code">ICN</div><div class="city">仁川</div><div class="time">18:45</div></div>
+      <div><div class="code">ICN</div><div class="city">仁川 (T1)</div><div class="time">18:45</div></div>
     </div>
     <p class="f-meta">抵達後車程約 1 小時前往飯店。</p>
   </article>
@@ -331,12 +317,12 @@ footer svg{width:90px;height:auto}
   <article class="card flight back">
     <div class="f-head"><span>回程　11/05（四）</span><span class="pill">長榮航空 BR159</span></div>
     <div class="route">
-      <div><div class="code">ICN</div><div class="city">仁川</div><div class="time">19:45</div></div>
+      <div><div class="code">ICN</div><div class="city">仁川 (T1)</div><div class="time">19:45</div></div>
       <div class="mid">
-        <svg viewBox="0 0 54 22" aria-hidden="true"><path d="M2 11 H40" stroke="#3E3A39" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/><path d="M38 4 L52 11 L38 18 L42 11z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 84 30" aria-hidden="true"><path class="mpd" d="M4 20 H80" stroke="#3E3A39" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round" fill="none"/><g transform="translate(2 10)"><g class="mp"><path d="M6 -2 L3 -9 H8 L13 -2z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2" stroke-linejoin="round"/><path d="M0 2 q0-5 6-5 H16 q6 0 9 5 q-3 5-9 5 H6 q-6 0-6-5z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/><path d="M0 -2 L-3 -8 H3 L6 -2z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2" stroke-linejoin="round"/><circle cx="17" cy="1.5" r="1.6" fill="#3E3A39"/><circle cx="11" cy="1.5" r="1.6" fill="#3E3A39"/></g></g></svg>
         2 小時 55 分
       </div>
-      <div><div class="code">TPE</div><div class="city">桃園</div><div class="time">21:40</div></div>
+      <div><div class="code">TPE</div><div class="city">桃園 (T2)</div><div class="time">21:40</div></div>
     </div>
     <p class="f-meta">晚餐於機上享用套餐。</p>
   </article>
@@ -361,7 +347,7 @@ footer svg{width:90px;height:auto}
 
 <!-- TODO -->
 <section id="todo" class="wrap">
-  <h2 class="sec-title"><span class="dot" style="background:var(--green)"></span>出發前待辦</h2>
+  <h2 class="sec-title"><span class="dot" style="background:var(--green)"></span>出發前確認</h2>
   <div class="progress" aria-hidden="true"><i id="bar"></i></div>
   <div class="pcount" id="pcount">0 / 0 完成</div>
   <ul class="todo" id="todoList"></ul>
@@ -542,24 +528,9 @@ function select(i,user,focus){
   select(idx,false);
 })();
 
-// 倒數
-const target=new Date("2026-11-01T15:15:00+08:00").getTime();
 const $=id=>document.getElementById(id);
-function tick(){
-  let diff=target-Date.now();
-  if(diff<=0){
-    $("cdLabel").textContent="旅程已經開始，玩得開心！";
-    ["cdD","cdH","cdM","cdS"].forEach(k=>$(k).textContent="0");return;
-  }
-  const s=Math.floor(diff/1000);
-  $("cdD").textContent=Math.floor(s/86400);
-  $("cdH").textContent=String(Math.floor(s%86400/3600)).padStart(2,"0");
-  $("cdM").textContent=String(Math.floor(s%3600/60)).padStart(2,"0");
-  $("cdS").textContent=String(s%60).padStart(2,"0");
-}
-tick();setInterval(tick,1000);
 
-// 待辦清單
+// 確認清單
 const TODO=[
  ["passport","個人護照","如未繳交旅行社，請務必自行攜帶"],
  ["won","兌換韓元","請務必記得兌換（明洞匯率較佳）"],
@@ -575,9 +546,7 @@ const TODO=[
  ["med","個人常備藥品","感冒藥、止痛藥、腸胃藥"],
  ["toiletry","牙膏、牙刷","響應環保，請自行攜帶"],
  ["slipper","拖鞋、涼鞋","方便在飯店房間使用"],
- ["sewing","針線包、指甲剪","以備不時之需"],
  ["bag","備用購物袋","採買伴手禮用"],
- ["qcode","填寫 Q-CODE 健康問卷","事先線上填寫，或入境時填紙本"],
  ["meat","不攜帶肉類製品","韓國與臺灣皆嚴格禁止，違者重罰"]
 ];
 const KEY="seoul2026-todo";
