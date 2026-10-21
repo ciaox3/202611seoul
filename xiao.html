@@ -199,6 +199,8 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .shop-list input:focus-visible+.box{outline:3px dashed var(--ink);outline-offset:3px}
 .shop-list .del{flex:none;width:40px;font-family:inherit;font-weight:900;font-size:1.1rem;color:var(--ink);background:var(--paper);border:var(--line);border-radius:16px;cursor:pointer}
 .shop-empty{border:3px dashed var(--ink);border-radius:20px;padding:8px 14px;font-size:.88rem;font-weight:700;background:var(--paper)}
+.ilink{flex:none;width:40px;display:grid;place-items:center;font-size:1.1rem;text-decoration:none;color:var(--ink);background:var(--sky);border:var(--line);border-radius:16px}
+.ilink:active{transform:scale(.9)}
 .shoplinks{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
 .shoplinks a{display:inline-block;text-decoration:none;color:var(--ink);border:var(--line);border-radius:999px;background:var(--green);padding:0 12px;font-size:.82rem;font-weight:900}
 
@@ -685,21 +687,31 @@ loadWx();
 
 // 待購清單（核選式，可自行新增商品）
 const STORES=[
-  {id:"oy",name:"Olive Young",note:"美妝保養｜明洞旗艦店（Day 4 自由逛街）"},
+  {id:"oy",name:"Olive Young",note:"美妝保養｜明洞旗艦店（Day 4 自由逛街）",preset:[
+    {id:"biodance",t:"Biodance 面膜",url:"https://global.oliveyoung.com/product/detail?prdtNo=GA230518544&accParam=160&utm_source=google&utm_medium=display&utm_campaign=growthmkt_google_tw_purchase_pmax&utm_content=260408_usual_none_skincare&utm_term=&gad_source=1&gad_campaignid=23516281378&gbraid=0AAAAA_ayjklSbYZdj_NL0Z4c3Ne0Hfp9R&gclid=CjwKCAjwxeHWBhBPEiwAiqtQ-Z6xuUS1BqIWjnkTX2Uf1jnR_uk9kx4-ACce4vxsx2Uz8Ca076P_LRoCXRQQAvD_BwE"}
+  ]},
   {id:"daiso",name:"大創 Daiso",note:"生活雜貨、小物"},
   {id:"lotte",name:"樂天超市 Lotte Mart",note:"零食伴手禮｜Day 3，滿 15,000 韓元可現場退稅"}
 ];
 const SKEY="seoul2026-shop";
 let shop={};try{shop=JSON.parse(localStorage.getItem(SKEY)||"{}")}catch(e){}
 const saveShop=()=>{try{localStorage.setItem(SKEY,JSON.stringify(shop))}catch(e){}};
+// 預設商品：每個預設項目只會加入一次（之後刪除也不會再出現）
+shop._seeded=shop._seeded||{};
+STORES.forEach(s=>(s.preset||[]).forEach(p=>{
+  const k=s.id+":"+p.id;
+  if(!shop._seeded[k]){(shop[s.id]=shop[s.id]||[]).push({id:"p-"+k,t:p.t,url:p.url,done:false});shop._seeded[k]=1}
+}));
+saveShop();
+const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"";
 function renderShop(){
   $("shopCards").innerHTML=STORES.map(s=>{
     const items=shop[s.id]||[];
     const done=items.filter(i=>i.done).length;
     return `<article class="card shop-card ${s.id}" id="shop-${s.id}">
       <div class="shop-head"><div><h3>${esc(s.name)}</h3><small>${esc(s.note)}</small></div><span class="shop-count">${done} / ${items.length}</span></div>
-      <form class="shop-form" data-store="${s.id}"><input type="text" maxlength="40" placeholder="輸入想買的商品…" aria-label="${esc(s.name)} 新增商品" required><button type="submit">新增</button></form>
-      ${items.length?`<ul class="shop-list">${items.map(i=>`<li><label><input type="checkbox" data-store="${s.id}" data-id="${i.id}" ${i.done?"checked":""}><span class="box">${CHECK}</span><span class="txt"><b>${esc(i.t)}</b></span></label><button type="button" class="del" data-store="${s.id}" data-id="${i.id}" aria-label="刪除 ${esc(i.t)}">×</button></li>`).join("")}</ul>`:'<div class="shop-empty">還沒有項目，在上方輸入商品名稱就能新增。</div>'}
+      <form class="shop-form" data-store="${s.id}"><input type="text" maxlength="600" placeholder="輸入想買的商品（可貼上網址）…" aria-label="${esc(s.name)} 新增商品" required><button type="submit">新增</button></form>
+      ${items.length?`<ul class="shop-list">${items.map(i=>`<li><label><input type="checkbox" data-store="${s.id}" data-id="${i.id}" ${i.done?"checked":""}><span class="box">${CHECK}</span><span class="txt"><b>${esc(i.t)}</b></span></label>${safeUrl(i.url)?`<a class="ilink" href="${esc(safeUrl(i.url)).replace(/"/g,"&quot;")}" target="_blank" rel="noopener noreferrer" aria-label="開啟 ${esc(i.t)} 商品連結" title="商品連結">🔗</a>`:""}<button type="button" class="del" data-store="${s.id}" data-id="${i.id}" aria-label="刪除 ${esc(i.t)}">×</button></li>`).join("")}</ul>`:'<div class="shop-empty">還沒有項目，在上方輸入商品名稱就能新增。</div>'}
     </article>`;
   }).join("");
 }
@@ -707,7 +719,10 @@ $("shopCards").addEventListener("submit",e=>{
   e.preventDefault();
   const f=e.target,id=f.dataset.store,v=f.querySelector("input").value.trim();
   if(!v)return;
-  (shop[id]=shop[id]||[]).push({id:Date.now()+""+Math.floor(Math.random()*1000),t:v,done:false});
+  const um=v.match(/https?:\/\/\S+/);
+  const url=um?um[0]:"";
+  const name=(um?v.replace(um[0],""):v).trim()||"商品連結";
+  (shop[id]=shop[id]||[]).push({id:Date.now()+""+Math.floor(Math.random()*1000),t:name,url:url,done:false});
   saveShop();renderShop();
   const inp=document.querySelector(`#shop-${id} .shop-form input`);if(inp)inp.focus();
 });
