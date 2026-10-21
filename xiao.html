@@ -128,8 +128,9 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .wx .temps b{font-size:1.2rem;font-weight:900}
 .wx .cond{font-weight:900;font-size:.9rem;margin-bottom:4px}
 .wx .tip{font-size:.82rem;font-weight:700;margin-top:6px}
-.wx .na{font-size:.88rem;font-weight:700}
-.wx-up{font-size:.72rem;text-align:right;margin-top:6px;font-weight:700}
+.wx-up{font-size:.72rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-top:8px;font-weight:700}
+.wx-src{font-size:.72rem;font-weight:700;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.wx-src a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .meals{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px}
 .meals div{border:var(--line);border-radius:16px;padding:4px 6px;font-size:.8rem;line-height:1.4;background:var(--paper)}
 .meals div:nth-child(1){background:var(--yellow)}
@@ -656,17 +657,19 @@ function renderWx(data,stamp){
     const uv=D0.uv_index_max?D0.uv_index_max[0]:null;
     const feel=c.apparent_temperature,t0=c.temperature_2m;
     const advice=feel<8?"體感很冷，出門要穿厚一點。":feel<16?"穿件外套出門剛好。":"現在天氣很舒服。";
-    $("wxNow").innerHTML=`<div class="ttl">🌤 首爾現在天氣</div><div class="row"><div class="big-ico">${wxIcon(k)}</div><div><div class="big">${tmp(t0)}</div><div class="sub">${nm}　體感 ${tmp(feel)}</div></div></div><div class="grid">${rows.map(r=>`<div><small>${r[0]}</small><b>${r[1]}</b></div>`).join("")}</div><div class="hl">👕 ${advice}${uv!=null?"紫外線指數今日最高 "+Math.round(uv)+"。":""}首爾比台灣快 1 小時。</div><div class="wx-up">更新：${stamp}</div>`;
+    const srcHtml='<span class="wx-src">天氣資料：<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>｜<a href="https://www.weather.go.kr/w/index.do" target="_blank" rel="noopener noreferrer">韓國氣象廳 KMA ↗</a></span>';
+    $("wxNow").innerHTML=`<div class="ttl">🌤 首爾現在天氣</div><div class="row"><div class="big-ico">${wxIcon(k)}</div><div><div class="big">${tmp(t0)}</div><div class="sub">${nm}　體感 ${tmp(feel)}</div></div></div><div class="grid">${rows.map(r=>`<div><small>${r[0]}</small><b>${r[1]}</b></div>`).join("")}</div><div class="hl">👕 ${advice}${uv!=null?"紫外線指數今日最高 "+Math.round(uv)+"。":""}首爾比台灣快 1 小時。</div><div class="wx-up">${srcHtml}<span>更新：${stamp}</span></div>`;
   }
   const H=data.hourly,D=data.daily;
+  const kmaFoot='<div class="wx-up"><span class="wx-src">天氣資料：<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>｜<a href="https://www.weather.go.kr/w/index.do" target="_blank" rel="noopener noreferrer">韓國氣象廳 KMA ↗</a></span></div>';
   document.querySelectorAll(".wx").forEach(el=>{
     const date=el.dataset.date;
     const i8=H.time.indexOf(date+"T08:00"),i20=H.time.indexOf(date+"T20:00");
     const di=D.time.indexOf(date);
-    if(i8<0||i20<0||di<0){el.innerHTML='<div class="na">🌈 尚無預報，越接近出發越準，每次打開都會更新。</div>';return}
+    if(i8<0||i20<0||di<0){el.innerHTML=`<div class="na">🌈 尚無預報，越接近出發越準，每次打開都會更新。</div>${kmaFoot}`;return}
     const [nm,k]=wxInfo(H.weather_code[i8+4]);
     const a=H.temperature_2m[i8],b=H.temperature_2m[i20];
-    el.innerHTML=`<div class="row">${wxIcon(k)}<div style="flex:1"><div class="cond">${nm}　降雨機率 ${D.precipitation_probability_max[di]??"--"}%</div><div class="temps"><div><small>早上 8 點</small><b>${tmp(a)}</b></div><div><small>晚上 8 點</small><b>${tmp(b)}</b></div></div></div></div><div class="tip">👕 ${tip(a,b)}（白天 ${tmp(D.temperature_2m_min[di])}～${tmp(D.temperature_2m_max[di])}）</div>`;
+    el.innerHTML=`<div class="row">${wxIcon(k)}<div style="flex:1"><div class="cond">${nm}　降雨機率 ${D.precipitation_probability_max[di]??"--"}%</div><div class="temps"><div><small>早上 8 點</small><b>${tmp(a)}</b></div><div><small>晚上 8 點</small><b>${tmp(b)}</b></div></div></div></div><div class="tip">👕 ${tip(a,b)}（白天 ${tmp(D.temperature_2m_min[di])}～${tmp(D.temperature_2m_max[di])}）</div>${kmaFoot}`;
   });
 }
 function loadWx(){
