@@ -203,6 +203,21 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .shop-empty{border:3px dashed var(--ink);border-radius:20px;padding:8px 14px;font-size:.88rem;font-weight:700;background:var(--paper)}
 .ilink{flex:none;width:40px;display:grid;place-items:center;font-size:1.1rem;text-decoration:none;color:var(--ink);background:var(--sky);border:var(--line);border-radius:16px}
 .ilink:active{transform:scale(.9)}
+.snote{margin-top:10px;border:var(--line);border-radius:16px;background:var(--paper)}
+.snote summary{cursor:pointer;font-weight:900;font-size:.88rem;padding:4px 12px;list-style:none}
+.snote summary::-webkit-details-marker{display:none}
+.snote summary::before{content:"▸ ";display:inline-block;transition:transform .2s}
+.snote[open] summary::before{transform:rotate(90deg)}
+.snote textarea,.note-form textarea,.note-item textarea{display:block;width:100%;box-sizing:border-box;font-family:inherit;font-weight:700;font-size:.95rem;color:var(--ink);background:var(--paper);border:var(--line);border-radius:16px;padding:8px 12px;resize:vertical;min-height:70px}
+.snote textarea{border:0;border-top:var(--line);border-radius:0 0 14px 14px}
+.note-card{background:var(--yellow)}
+.note-form{display:flex;gap:8px;margin-bottom:10px;align-items:flex-end}
+.note-form textarea{flex:1;min-height:48px}
+.note-form button{flex:none;font-family:inherit;font-weight:900;color:var(--ink);background:var(--paper);border:var(--line);border-radius:999px;padding:4px 16px;cursor:pointer}
+.note-list{list-style:none;display:grid;gap:8px}
+.note-item{display:flex;gap:8px;align-items:stretch}
+.note-item textarea{flex:1}
+.note-item .del{flex:none;width:40px;font-family:inherit;font-weight:900;font-size:1.1rem;color:var(--ink);background:var(--paper);border:var(--line);border-radius:16px;cursor:pointer}
 .shoplinks{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
 .shoplinks a{display:inline-block;text-decoration:none;color:var(--ink);border:var(--line);border-radius:999px;background:var(--green);padding:0 12px;font-size:.82rem;font-weight:900}
 
@@ -256,6 +271,7 @@ footer svg{width:90px;height:auto}
     <li><a href="#days">行程</a></li>
     <li><a href="#todo">確認</a></li>
     <li><a href="#shop">待購</a></li>
+    <li><a href="#notes">備註</a></li>
     <li><a href="#hotel">住宿</a></li>
   </ul>
 </nav>
@@ -390,6 +406,15 @@ footer svg{width:90px;height:auto}
   <div id="shopCards"></div>
 </section>
 
+<!-- NOTES -->
+<section id="notes" class="wrap">
+  <h2 class="sec-title"><span class="dot" style="background:var(--yellow)"></span>備註</h2>
+  <article class="card note-card">
+    <form class="note-form" id="noteForm"><textarea id="noteInput" maxlength="2000" placeholder="輸入備註資訊…" aria-label="新增備註" required></textarea><button type="submit">新增</button></form>
+    <div id="noteList"></div>
+  </article>
+</section>
+
 <!-- HOTEL -->
 <section id="hotel" class="wrap hotel">
   <h2 class="sec-title"><span class="dot" style="background:var(--coral)"></span>住宿資訊</h2>
@@ -518,12 +543,13 @@ DAYS.forEach((d,i)=>{
   tabs.appendChild(b);
   const p=document.createElement("div");
   p.id="panel"+i;p.setAttribute("role","tabpanel");p.setAttribute("aria-labelledby","tab"+i);p.hidden=true;
-  const tl=d.items.map(it=>{
+  const tl=d.items.map((it,j)=>{
     if(it.t==="leg")return `<li class="leg"><span class="tag ${TAGCLS[it.tag]}">${it.label}</span>${it.dur?`<span class="dur">${esc(it.dur)}</span>`:""}</li>`;
+    const sn=it.must&&!/明洞/.test(it.name)?`<details class="snote" data-k="${i}-${j}"><summary>📝 備註</summary><textarea maxlength="2000" placeholder="輸入備註…" aria-label="${esc(it.name)} 備註"></textarea></details>`:"";
     return `<li class="${it.must?"must":""}"><div class="stop ${it.must?"must":""}">
       ${it.when?`<div class="when">${it.when}</div>`:""}
       <h4>${esc(it.name)}${it.must?'<span class="must-tag">必去</span>':""}</h4>
-      <div class="en">${esc(it.en)}</div><p>${esc(it.desc)}</p>${it.remind?`<div class="remind"><b>📌 大芬提醒．提醒大芬</b>${esc(it.remind)}</div>`:""}${it.shop?`<div class="shoplinks">${it.shop.map(s=>`<a href="#shop-${s[0]}">🛒 ${s[1]} 待購清單</a>`).join("")}</div>`:""}</div></li>`;
+      <div class="en">${esc(it.en)}</div><p>${esc(it.desc)}</p>${it.remind?`<div class="remind"><b>📌 大芬提醒．提醒大芬</b>${esc(it.remind)}</div>`:""}${it.shop?`<div class="shoplinks">${it.shop.map(s=>`<a href="#shop-${s[0]}">🛒 ${s[1]} 待購清單</a>`).join("")}</div>`:""}${sn}</div></li>`;
   }).join("");
   p.innerHTML=`<div class="day-head"><div class="day-badge"><div><small>DAY</small>${d.n}</div></div>
     <div><h3>${d.title}</h3><p>${d.sub}</p></div></div>
@@ -532,6 +558,14 @@ DAYS.forEach((d,i)=>{
     <div class="meals">${d.meals.map(m=>{const [a,b2]=m.split("｜");return `<div><b>${a}</b>${b2}</div>`}).join("")}</div>
     <ol class="timeline">${tl}</ol>`;
   panels.appendChild(p);
+});
+const NKEY="seoul2026-stopnotes";
+let snotes={};try{snotes=JSON.parse(localStorage.getItem(NKEY)||"{}")}catch(e){}
+document.querySelectorAll(".snote").forEach(d=>{
+  const ta=d.querySelector("textarea"),k=d.dataset.k;
+  ta.value=snotes[k]||"";
+  if(ta.value)d.open=true;
+  ta.addEventListener("input",()=>{snotes[k]=ta.value;try{localStorage.setItem(NKEY,JSON.stringify(snotes))}catch(e){}});
 });
 const GKEY="seoul2026-gather";
 let gsaved={};try{gsaved=JSON.parse(localStorage.getItem(GKEY)||"{}")}catch(e){}
@@ -766,6 +800,28 @@ $("shopCards").addEventListener("click",e=>{
   saveShop();renderShop();
 });
 renderShop();
+
+// 備註
+const BKEY="seoul2026-notes";
+let notes=[];try{notes=JSON.parse(localStorage.getItem(BKEY)||"[]");if(!Array.isArray(notes))notes=[]}catch(e){}
+const saveNotes=()=>{try{localStorage.setItem(BKEY,JSON.stringify(notes))}catch(e){}};
+function renderNotes(){
+  $("noteList").innerHTML=notes.length?`<ul class="note-list">${notes.map(n=>`<li class="note-item"><textarea data-id="${n.id}" maxlength="2000" aria-label="備註內容">${esc(n.t)}</textarea><button type="button" class="del" data-id="${n.id}" aria-label="刪除備註">×</button></li>`).join("")}</ul>`:'<div class="shop-empty">還沒有備註，在上方輸入就能新增。</div>';
+}
+$("noteForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=$("noteInput").value.trim();if(!v)return;
+  notes.push({id:Date.now()+""+Math.floor(Math.random()*1000),t:v});
+  $("noteInput").value="";saveNotes();renderNotes();
+});
+$("noteList").addEventListener("input",e=>{
+  const n=notes.find(x=>x.id===e.target.dataset.id);if(n){n.t=e.target.value;saveNotes()}
+});
+$("noteList").addEventListener("click",e=>{
+  const b=e.target.closest(".del");if(!b)return;
+  notes=notes.filter(x=>x.id!==b.dataset.id);saveNotes();renderNotes();
+});
+renderNotes();
 </script>
 </body>
 </html>
