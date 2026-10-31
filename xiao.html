@@ -182,6 +182,7 @@ nav a:focus-visible,button:focus-visible,input:focus-visible+span{outline:3px da
 .shop-card.oy{background:var(--coral)}
 .shop-card.daiso{background:var(--yellow)}
 .shop-card.lotte{background:var(--green)}
+.shop-card.md{background:var(--sky)}
 .shop-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}
 .shop-head h3{font-size:1.2rem}
 .shop-head small{display:block;font-size:.78rem;font-weight:700;line-height:1.4}
@@ -694,9 +695,32 @@ loadWx();
 const STORES=[
   {id:"oy",name:"Olive Young",note:"美妝保養｜明洞旗艦店（Day 4 自由逛街）",preset:[
     {id:"biodance",t:"Biodance 面膜",url:"https://global.oliveyoung.com/product/detail?prdtNo=GA230518544&accParam=160&utm_source=google&utm_medium=display&utm_campaign=growthmkt_google_tw_purchase_pmax&utm_content=260408_usual_none_skincare&utm_term=&gad_source=1&gad_campaignid=23516281378&gbraid=0AAAAA_ayjklSbYZdj_NL0Z4c3Ne0Hfp9R&gclid=CjwKCAjwxeHWBhBPEiwAiqtQ-Z6xuUS1BqIWjnkTX2Uf1jnR_uk9kx4-ACce4vxsx2Uz8Ca076P_LRoCXRQQAvD_BwE"}
+    {id:"oy2",t:"大_Torriden 玻尿酸補水面膜 x1",url:"https://global.oliveyoung.com/product/detail?prdtNo=GA260540331"},
+    {id:"oy3",t:"大_Lilyeve頭皮養髮精華梳 #豐盈小橘梳 x1",url:"https://global.oliveyoung.com/product/detail?prdtNo=GA251235989"},
+    {id:"oy4",t:"大_ROUND LAB 白樺樹保濕防曬棒 SPF50+ x1",url:"https://global.oliveyoung.com/product/detail?prdtNo=GA260439809"},
+    {id:"oy5",t:"大_OBgE控油清爽防曬棒 x1",url:"https://www.momoshop.com.tw/product/15341489"},
+    {id:"oy6",t:"大_MEDIHEAL 面膜(Madecassoside, 玫瑰)",url:"https://global.oliveyoung.com/product/detail?prdtNo=GA240824996"},
+    {id:"oy7",t:"Anua PDRN Hyaluronic Acid 100 Moisturizing Cream"},
+    {id:"oy8",t:"DELIGHT PROJECT 魷魚條",url:"https://global.oliveyoung.com/product/detail?prdtNo=GA260742000"}
   ]},
-  {id:"daiso",name:"大創 Daiso",note:"生活雜貨、小物"},
-  {id:"lotte",name:"樂天超市 Lotte Mart",note:"零食伴手禮｜Day 3，滿 15,000 韓元可現場退稅"}
+  {id:"daiso",name:"大創 Daiso",note:"生活雜貨、小物",preset:[
+    {id:"d1",t:"大_SOMISOME Subuncho 藍(保濕)",url:"https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1076096"},
+    {id:"d2",t:"大_髮圈",url:"https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=35124&recmYn=N"},
+    {id:"d3",t:"大_Kakao 隔熱袋",url:"https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1073269"},
+    {id:"d4",t:"大_折疊矽膠圓盒",url:"https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1052451"},
+    {id:"d5",t:"大_黑色折疊大肩包",url:"https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=10413371"},
+    {id:"d6",t:"大_手提包(白/黑)",url:"https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1082438"}
+  ]},
+  {id:"md",name:"明洞：其他",note:"明洞商圈其他店家",preset:[
+    {id:"m1",t:"大_Reju-All Advanced PDRN 修護保濕乳霜 x2",url:"https://www.momoshop.com.tw/TP/TP0010028/goodsDetail/TP00100280000005"},
+    {id:"m2",t:"大_CU IMINT咖啡糖(黑)",url:"https://www.mymasy.com.tw/imint-espresso-sugar-free-coffee-xylitol-candy"},
+    {id:"m3",t:"Kakao Ryan 熱敷袋",url:"https://store.kakao.com/kakaofriends/products/641324397"},
+    {id:"m4",t:"Kakao Ryan 章魚牙刷架",url:"https://store.kakao.com/kakaofriends/products/506890809"},
+    {id:"m5",t:"派大星 x Ryan娃娃",url:"https://store.kakao.com/kakaofriends/products/562074919"}
+  ]},
+  {id:"lotte",name:"樂天超市 Lotte Mart",note:"零食伴手禮｜Day 3，滿 15,000 韓元可現場退稅",preset:[
+    {id:"l1",t:"Paldo海帶蛤蜊拉麵",url:"https://www.momoshop.com.tw/TP/TP0009156/goodsDetail/TP00091560000406"}
+  ]}
 ];
 const SKEY="seoul2026-shop";
 let shop={};try{shop=JSON.parse(localStorage.getItem(SKEY)||"{}")}catch(e){}
